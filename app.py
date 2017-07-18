@@ -4,7 +4,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Email, Length
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate-password_hash, check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 app = Flask(__name__)
@@ -42,7 +42,7 @@ def index():
     
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = loginForm()
+    form = LoginForm()
     
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -61,7 +61,7 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
         
-    #return render_template('signup.html', form=form)
+    return render_template('signup.html', form=form)
     
 @app.route('/goals')
 @login_required
